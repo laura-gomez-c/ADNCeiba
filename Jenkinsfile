@@ -16,7 +16,7 @@ pipeline {
         stage('Checkout'){ 
             steps{ 
                 echo "------------>Checkout<------------" 
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GitHub_laura-gomez-c', url:'https://github.com/laura-gomez-c/parqueadero-ceiba.git']]]) 
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GitHub_laura-gomez-c', url:'https://github.com/laura-gomez-c/parqueadero-ceiba.git']]]) 
                 sh 'chmod +x ADNParquedero/gradlew'
             } 
         }     
