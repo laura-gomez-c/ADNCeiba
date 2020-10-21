@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'Slave4'
+        label 'Slave_Induccion'
     }
       
     options { 
