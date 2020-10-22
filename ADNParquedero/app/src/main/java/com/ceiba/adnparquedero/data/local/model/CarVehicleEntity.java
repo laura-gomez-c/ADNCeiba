@@ -1,5 +1,8 @@
 package com.ceiba.adnparquedero.data.local.model;
 
+import com.ceiba.adnparquedero.domain.model.CarVehicleDomainModel;
+import com.ceiba.adnparquedero.domain.model.MotoVehicleDomainModel;
+
 import java.util.UUID;
 
 import io.realm.RealmObject;
@@ -23,5 +26,11 @@ public class CarVehicleEntity extends RealmObject {
 
     public void mapFromCarVehicleDomainModel(VehicleEntity vehicleEntity) {
         this.setVehicleEntity(vehicleEntity);
+    }
+
+    public void mapToCarVehicleDomainModel(CarVehicleDomainModel carVehicleDomainModel) {
+        carVehicleDomainModel.setLicensePlate(this.getVehicleEntity().getLicensePlate());
+        carVehicleDomainModel.setArrivingTime(this.getVehicleEntity().getArrivingTime());
+        carVehicleDomainModel.setLeavingTime(this.getVehicleEntity().getLeavingTime());
     }
 }

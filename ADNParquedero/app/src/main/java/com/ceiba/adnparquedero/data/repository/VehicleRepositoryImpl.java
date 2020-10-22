@@ -92,4 +92,43 @@ public class VehicleRepositoryImpl implements VehicleRepository {
             realm.executeTransaction(r -> r.insertOrUpdate(motoCehicleEntity));
         }
     }
+
+    @Override
+    public CarVehicleDomainModel getCarVehicleByLicensePlate(String licensePlate) {
+        try (Realm realm = Realm.getDefaultInstance()) {
+            CarVehicleEntity carVehicleEntity = realm.where(CarVehicleEntity.class).equalTo("vehicleEntity.licensePlate", licensePlate).findFirst();
+            if (carVehicleEntity == null) return null;
+
+            //Map child class to domain model
+            CarVehicleDomainModel carVehicleDomainModel = new CarVehicleDomainModel();
+            carVehicleEntity.mapToCarVehicleDomainModel(carVehicleDomainModel);
+            return carVehicleDomainModel;
+        }
+    }
+
+    @Override
+    public MotoVehicleDomainModel getMotoVehicleByLicensePlate(String licensePlate) {
+        try (Realm realm = Realm.getDefaultInstance()) {
+            MotoVehicleEntity motoCehicleEntity = realm.where(MotoVehicleEntity.class).equalTo("vehicleEntity.licensePlate", licensePlate).findFirst();
+            if (motoCehicleEntity == null) return null;
+
+            //Map child class to domain model
+            MotoVehicleDomainModel motoVehicleDomainModel = new MotoVehicleDomainModel();
+            motoCehicleEntity.mapToMotoVehicleDomainModel(motoVehicleDomainModel);
+            return motoVehicleDomainModel;
+        }
+    }
+
+    @Override
+    public Float getParkingPrice(String vehicleType, String parkingTimeMeasure) {
+        try (Realm realm = Realm.getDefaultInstance()) {
+            ParkingPriceEntity priceEntity = realm.where(ParkingPriceEntity.class)
+                    .equalTo("vehicleType", vehicleType)
+                    .equalTo("parkingTimeMeasure", parkingTimeMeasure)
+                    .findFirst();
+            if (priceEntity == null) return null;
+
+            return priceEntity.getPrice();
+        }
+    }
 }

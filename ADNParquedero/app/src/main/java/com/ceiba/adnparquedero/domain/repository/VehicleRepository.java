@@ -17,4 +17,10 @@ public interface VehicleRepository {
     Integer getCarVehicleTypeTotalOccupancy();
 
     Integer getMotoVehicleTypeTotalOccupancy();
+
+    CarVehicleDomainModel getCarVehicleByLicensePlate(String licensePlate);
+
+    MotoVehicleDomainModel getMotoVehicleByLicensePlate(String licensePlate);
+
+    Float getParkingPrice(String vehicleType, String parkingTimeMeasure);
 }

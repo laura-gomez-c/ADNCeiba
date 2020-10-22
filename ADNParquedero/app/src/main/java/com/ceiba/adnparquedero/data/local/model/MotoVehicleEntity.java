@@ -16,14 +16,14 @@ public class MotoVehicleEntity extends RealmObject {
     String id = UUID.randomUUID().toString();
 
     @Required
-    String cylinderCapacity;
+    Float cylinderCapacity;
 
     VehicleEntity vehicleEntity;
 
     public MotoVehicleEntity() {
     }
 
-    public MotoVehicleEntity(String cylinderCapacity, VehicleEntity vehicleEntity) {
+    public MotoVehicleEntity(Float cylinderCapacity, VehicleEntity vehicleEntity) {
         this.cylinderCapacity = cylinderCapacity;
         this.vehicleEntity = vehicleEntity;
     }
@@ -31,5 +31,12 @@ public class MotoVehicleEntity extends RealmObject {
     public void mapFromMotoVehicleDomainModel(MotoVehicleDomainModel motoVehicleDomainModel, VehicleEntity vehicleEntity) {
         this.setCylinderCapacity(motoVehicleDomainModel.getCylinderCapacity());
         this.setVehicleEntity(vehicleEntity);
+    }
+
+    public void mapToMotoVehicleDomainModel(MotoVehicleDomainModel motoVehicleDomainModel) {
+        motoVehicleDomainModel.setCylinderCapacity(motoVehicleDomainModel.getCylinderCapacity());
+        motoVehicleDomainModel.setLicensePlate(this.getVehicleEntity().getLicensePlate());
+        motoVehicleDomainModel.setArrivingTime(this.getVehicleEntity().getArrivingTime());
+        motoVehicleDomainModel.setLeavingTime(this.getVehicleEntity().getLeavingTime());
     }
 }

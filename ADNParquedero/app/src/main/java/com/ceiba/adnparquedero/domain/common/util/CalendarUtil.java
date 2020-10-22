@@ -32,4 +32,12 @@ public class CalendarUtil {
             return null;
         }
     }
+
+    public static long obtainHourDifference(Calendar start, Calendar end) {
+        long different = end.getTime().getTime() - start.getTime().getTime();
+        long secondsInMilli = 1000;
+        long minutesInMilli = secondsInMilli * 60;
+        long hoursInMilli = minutesInMilli * 60;
+        return different / hoursInMilli;
+    }
 }

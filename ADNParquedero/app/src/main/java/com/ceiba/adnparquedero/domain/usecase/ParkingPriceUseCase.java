@@ -8,12 +8,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class ParkingPriceUseCaseImpl {
+public class ParkingPriceUseCase {
 
     @Inject
     VehicleRepository vehicleRepository;
 
-    public ParkingPriceUseCaseImpl() {
+    public ParkingPriceUseCase() {
         DaggerAppComponent.builder().build().inject(this);
     }
 

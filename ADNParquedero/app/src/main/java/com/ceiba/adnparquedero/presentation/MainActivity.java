@@ -8,20 +8,20 @@ import com.ceiba.adnparquedero.R;
 import com.ceiba.adnparquedero.domain.common.constant.ParkingTimeMeasure;
 import com.ceiba.adnparquedero.domain.common.constant.VehicleType;
 import com.ceiba.adnparquedero.domain.model.ParkingPriceDomainModel;
-import com.ceiba.adnparquedero.domain.usecase.ParkingPriceUseCaseImpl;
+import com.ceiba.adnparquedero.domain.usecase.ParkingPriceUseCase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ParkingPriceUseCaseImpl parkingPriceUseCase;
+    private ParkingPriceUseCase parkingPriceUseCase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        parkingPriceUseCase = new ParkingPriceUseCaseImpl();
+        parkingPriceUseCase = new ParkingPriceUseCase();
 
         //Logic
         initializeParkingPriceTable();
