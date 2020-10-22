@@ -4,7 +4,6 @@ import com.ceiba.adnparquedero.base.di.DaggerAppComponent;
 import com.ceiba.adnparquedero.domain.common.constant.DateFormat;
 import com.ceiba.adnparquedero.domain.common.constant.Regex;
 import com.ceiba.adnparquedero.domain.common.constant.VehicleCapacity;
-import com.ceiba.adnparquedero.domain.common.constant.VehicleType;
 import com.ceiba.adnparquedero.domain.common.util.CalendarUtil;
 import com.ceiba.adnparquedero.domain.model.CarVehicleDomainModel;
 import com.ceiba.adnparquedero.domain.model.MotoVehicleDomainModel;

@@ -7,7 +7,6 @@ import com.ceiba.adnparquedero.data.local.model.VehicleEntity;
 import com.ceiba.adnparquedero.domain.model.CarVehicleDomainModel;
 import com.ceiba.adnparquedero.domain.model.MotoVehicleDomainModel;
 import com.ceiba.adnparquedero.domain.model.ParkingPriceDomainModel;
-import com.ceiba.adnparquedero.domain.model.VehicleDomainModel;
 import com.ceiba.adnparquedero.domain.repository.VehicleRepository;
 
 import java.util.ArrayList;
@@ -19,15 +18,13 @@ import io.realm.Realm;
 
 public class VehicleRepositoryImpl implements VehicleRepository {
 
-    private Realm realm;
-
     @Inject
     public VehicleRepositoryImpl() {
-        realm = Realm.getDefaultInstance();
+
     }
 
     @Override
-    public boolean createParkingPriceTable(List<ParkingPriceDomainModel> priceDomainModels) {
+    public void createParkingPriceTable(List<ParkingPriceDomainModel> priceDomainModels) {
         try (Realm realm = Realm.getDefaultInstance()) {
             List<ParkingPriceEntity> entities = new ArrayList<>();
             for (ParkingPriceDomainModel priceDomainModel : priceDomainModels) {
@@ -38,11 +35,8 @@ public class VehicleRepositoryImpl implements VehicleRepository {
                 entities.add(priceEntity);
 
                 //Insert locally
-                realm.executeTransaction(r -> r.insertOrUpdate(entities));
             }
-            return true;
-        } catch (Exception e) {
-            return false;
+            realm.executeTransaction(r -> r.insertOrUpdate(entities));
         }
     }
 

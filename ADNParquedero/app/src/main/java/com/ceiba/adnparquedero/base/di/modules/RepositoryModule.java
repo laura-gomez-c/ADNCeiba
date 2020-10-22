@@ -7,8 +7,8 @@ import dagger.Binds;
 import dagger.Module;
 
 @Module
-public abstract class RepositoryModule {
+public interface RepositoryModule {
 
     @Binds
-    abstract VehicleRepository vehicleRepository(VehicleRepositoryImpl repositorioUsuarioImpl);
+    VehicleRepository vehicleRepository(VehicleRepositoryImpl repositorioUsuarioImpl);
 }

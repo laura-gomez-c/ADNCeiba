@@ -17,7 +17,7 @@ public class ParkingPriceUseCaseImpl {
         DaggerAppComponent.builder().build().inject(this);
     }
 
-    public boolean createPriceTable(List<ParkingPriceDomainModel> priceDomainModels) {
-        return vehicleRepository.createParkingPriceTable(priceDomainModels);
+    public void createPriceTable(List<ParkingPriceDomainModel> priceDomainModels) {
+        vehicleRepository.createParkingPriceTable(priceDomainModels);
     }
 }

@@ -1,7 +1,6 @@
 package com.ceiba.adnparquedero.data.local.model;
 
 import com.ceiba.adnparquedero.domain.model.MotoVehicleDomainModel;
-import com.ceiba.adnparquedero.domain.model.VehicleDomainModel;
 
 import java.util.UUID;
 

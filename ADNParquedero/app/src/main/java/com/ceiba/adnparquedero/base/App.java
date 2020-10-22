@@ -1,7 +1,6 @@
 package com.ceiba.adnparquedero.base;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.ceiba.adnparquedero.base.di.DaggerAppComponent;
 
@@ -15,7 +14,6 @@ public class App extends Application {
         super.onCreate();
         this.initDagger();
         this.initRealmDB();
-        Log.d("init...", "init application");
     }
 
     private void initDagger() {

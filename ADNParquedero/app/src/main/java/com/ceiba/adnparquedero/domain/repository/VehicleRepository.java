@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface VehicleRepository {
 
-    boolean createParkingPriceTable(List<ParkingPriceDomainModel> priceDomainModels);
+    void createParkingPriceTable(List<ParkingPriceDomainModel> priceDomainModels);
 
     void registerCar(CarVehicleDomainModel carVehicleDomainModel);
 

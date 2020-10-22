@@ -12,6 +12,9 @@ public class VehicleDomainModel {
     private String leavingTime;
 
 
+    public VehicleDomainModel() {
+    }
+
     public VehicleDomainModel(String licensePlate, String arrivingTime, String leavingTime) {
         this.licensePlate = licensePlate;
         this.arrivingTime = arrivingTime;
