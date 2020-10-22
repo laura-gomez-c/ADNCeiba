@@ -29,7 +29,6 @@ public class CalendarUtil {
             calendar.setTime(dateFormat.parse(stringCalendar));
             return calendar;
         } catch (ParseException pe) {
-            pe.printStackTrace();
             return null;
         }
     }
