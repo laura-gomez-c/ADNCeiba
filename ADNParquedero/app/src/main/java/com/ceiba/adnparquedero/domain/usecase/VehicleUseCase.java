@@ -81,7 +81,7 @@ public class VehicleUseCase {
     }
     //endregion
 
-    //region collect parking price
+    //region Collect parking price
     public String collectMotoParking(String licensePlate) {
         MotoVehicleDomainModel motoVehicleDomainModel = vehicleRepository.getMotoVehicleByLicensePlate(licensePlate);
         if (motoVehicleDomainModel != null) return null;
@@ -93,6 +93,7 @@ public class VehicleUseCase {
         float motoParkingPrice = calculateVehicleParkingPrice(VehicleType.MOTO, (int) parkingHours, vehicleRepository.getParkingPrice(VehicleType.MOTO, ParkingTimeMeasure.HOUR), vehicleRepository.getParkingPrice(VehicleType.MOTO, ParkingTimeMeasure.DAY));
 
         //Validate moto cylinder capacity
+        assert motoVehicleDomainModel.getCylinderCapacity() != null;
         if (motoVehicleDomainModel.getCylinderCapacity() > 500) motoParkingPrice += 2000;
         return String.valueOf((int) motoParkingPrice);
     }
