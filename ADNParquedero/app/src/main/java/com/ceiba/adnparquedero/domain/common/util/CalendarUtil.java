@@ -1,0 +1,36 @@
+package com.ceiba.adnparquedero.domain.common.util;
+
+import com.google.common.base.Strings;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+public class CalendarUtil {
+
+    public static String parseCalendarToString(Calendar calendar, String format) {
+        if (calendar == null || Strings.isNullOrEmpty(format)) {
+            return null;
+        }
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
+        return dateFormat.format(calendar.getTime());
+    }
+
+    public static Calendar parseStringToCalendar(String stringCalendar, String format) {
+        if (stringCalendar == null || Strings.isNullOrEmpty(format)) {
+            return null;
+        }
+
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(dateFormat.parse(stringCalendar));
+            return calendar;
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+            return null;
+        }
+    }
+}
