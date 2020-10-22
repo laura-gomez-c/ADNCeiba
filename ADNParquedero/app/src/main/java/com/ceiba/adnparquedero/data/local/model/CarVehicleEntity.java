@@ -15,7 +15,6 @@ public class CarVehicleEntity extends RealmObject {
     @PrimaryKey
     String id = UUID.randomUUID().toString();
 
-    @Required
     VehicleEntity vehicleEntity;
 
     public CarVehicleEntity() {

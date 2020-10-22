@@ -19,7 +19,6 @@ public class MotoVehicleEntity extends RealmObject {
     @Required
     String cylinderCapacity;
 
-    @Required
     VehicleEntity vehicleEntity;
 
     public MotoVehicleEntity() {
