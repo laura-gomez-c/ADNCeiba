@@ -67,10 +67,13 @@ public class VehicleUseCase {
     private boolean hasLicensePlateStartedWith(String initialLetter, String licensePlate) {
         return licensePlate.toUpperCase().matches(Regex.START_WITH.concat(initialLetter.toUpperCase()));
     }
+    //endregion
 
+
+    //region Collect parking price
     public String collectCarParking(String licensePlate) {
         CarVehicleDomainModel carVehicleDomainModel = vehicleRepository.getCarVehicleByLicensePlate(licensePlate);
-        if (carVehicleDomainModel != null) return null;
+        if (carVehicleDomainModel == null) return null;
 
         //Calculate parking hours
         float parkingHours = calculateParkingHours(carVehicleDomainModel);
@@ -79,12 +82,11 @@ public class VehicleUseCase {
         float carParkingPrice = calculateVehicleParkingPrice(VehicleType.CAR, (int) parkingHours, vehicleRepository.getParkingPrice(VehicleType.CAR, ParkingTimeMeasure.HOUR), vehicleRepository.getParkingPrice(VehicleType.CAR, ParkingTimeMeasure.DAY));
         return String.valueOf((int) carParkingPrice);
     }
-    //endregion
 
-    //region Collect parking price
+
     public String collectMotoParking(String licensePlate) {
         MotoVehicleDomainModel motoVehicleDomainModel = vehicleRepository.getMotoVehicleByLicensePlate(licensePlate);
-        if (motoVehicleDomainModel != null) return null;
+        if (motoVehicleDomainModel == null) return null;
 
         //Calculate parking hours
         float parkingHours = calculateParkingHours(motoVehicleDomainModel);
@@ -93,7 +95,6 @@ public class VehicleUseCase {
         float motoParkingPrice = calculateVehicleParkingPrice(VehicleType.MOTO, (int) parkingHours, vehicleRepository.getParkingPrice(VehicleType.MOTO, ParkingTimeMeasure.HOUR), vehicleRepository.getParkingPrice(VehicleType.MOTO, ParkingTimeMeasure.DAY));
 
         //Validate moto cylinder capacity
-        assert motoVehicleDomainModel.getCylinderCapacity() != null;
         if (motoVehicleDomainModel.getCylinderCapacity() > 500) motoParkingPrice += 2000;
         return String.valueOf((int) motoParkingPrice);
     }

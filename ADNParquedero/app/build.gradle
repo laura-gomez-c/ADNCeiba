@@ -76,9 +76,11 @@ dependencies {
     //Testing
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-    // Core library
-    androidTestImplementation 'androidx.test:core:1.0.0'
+    testImplementation 'android.arch.core:core-testing:1.0.0-alpha3'
+    testImplementation 'org.mockito:mockito-core:2.8.47'
+    testImplementation 'org.powermock:powermock-core:1.7.4'
+    testImplementation 'org.powermock:powermock-module-testng:1.7.4'
+    testImplementation 'org.powermock:powermock-api-mockito2:1.7.4'
 
     // AndroidJUnitRunner and JUnit Rules
     androidTestImplementation 'androidx.test:runner:1.1.0'

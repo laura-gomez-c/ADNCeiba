@@ -5,11 +5,11 @@ import lombok.Data;
 @Data
 public class VehicleDomainModel {
 
-    private String licensePlate;
+    protected String licensePlate;
 
-    private String arrivingTime;
+    protected String arrivingTime;
 
-    private String leavingTime;
+    protected String leavingTime;
 
 
     public VehicleDomainModel() {
