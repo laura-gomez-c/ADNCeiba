@@ -1,13 +1,10 @@
 package com.ceiba.adnparquedero.domain.usecase;
 
 import com.ceiba.adnparquedero.domain.common.constant.DateFormat;
-import com.ceiba.adnparquedero.domain.common.constant.ParkingTimeMeasure;
-import com.ceiba.adnparquedero.domain.common.constant.Regex;
-import com.ceiba.adnparquedero.domain.common.constant.VehicleCapacity;
-import com.ceiba.adnparquedero.domain.common.constant.VehicleType;
 import com.ceiba.adnparquedero.domain.common.util.CalendarOperatorUtil;
 import com.ceiba.adnparquedero.domain.model.CarVehicleDomainModel;
 import com.ceiba.adnparquedero.domain.model.MotoVehicleDomainModel;
+import com.ceiba.adnparquedero.domain.model.ParkingPriceDomainModel;
 import com.ceiba.adnparquedero.domain.model.VehicleDomainModel;
 import com.ceiba.adnparquedero.domain.repository.VehicleRepository;
 
@@ -34,43 +31,17 @@ public class VehicleUseCaseImpl implements VehicleUseCase {
     public void registerMoto(MotoVehicleDomainModel motoVehicleDomainModel) {
         vehicleRepository.registerMoto(motoVehicleDomainModel);
     }
-
-    @Override
-    public String getArrivingTime(Calendar calendar) {
-        return CalendarOperatorUtil.parseCalendarToString(calendar, DateFormat.DATE_TIME);
-    }
     //endregion
 
     //region Validations
     @Override
     public boolean hasCarCapacity() {
-        return VehicleCapacity.CAR_CAPACITY < vehicleRepository.getCarVehicleTypeTotalOccupancy();
+        return 20 < vehicleRepository.getCarVehicleTypeTotalOccupancy();
     }
 
     @Override
     public boolean hasMotoCapacity() {
-        return VehicleCapacity.MOTO_CAPACITY < vehicleRepository.getMotoVehicleTypeTotalOccupancy();
-    }
-
-    /**
-     * Method to validate the parking entry, if the license plate starting with "A" and the entry calendar day is SUNDAY or MONDAY
-     * the vehicle won't be able to get in. Otherwise, the vehicle will so.
-     *
-     * @param vehicleDomainModel, vehicle to be validated.
-     * @return true if the entry is valid. Otherwise, false.
-     */
-    @Override
-    public boolean hasValidEntryByDay(VehicleDomainModel vehicleDomainModel) {
-        if (hasLicensePlateStartedWith("A", vehicleDomainModel.getLicensePlate())) {
-            Calendar calendar = Calendar.getInstance();
-            return Calendar.SUNDAY != calendar.get(Calendar.DAY_OF_WEEK) && Calendar.MONDAY != calendar.get(Calendar.DAY_OF_WEEK);
-        }
-
-        return true;
-    }
-
-    private boolean hasLicensePlateStartedWith(String initialLetter, String licensePlate) {
-        return licensePlate.toUpperCase().matches(Regex.START_WITH.concat(initialLetter.toUpperCase()));
+        return 10 < vehicleRepository.getMotoVehicleTypeTotalOccupancy();
     }
     //endregion
 
@@ -85,7 +56,7 @@ public class VehicleUseCaseImpl implements VehicleUseCase {
         float parkingHours = calculateParkingHours(carVehicleDomainModel);
 
         //Calculate vehicle parking price
-        float carParkingPrice = calculateVehicleParkingPrice(VehicleType.CAR, (int) parkingHours, vehicleRepository.getParkingPrice(VehicleType.CAR, ParkingTimeMeasure.HOUR), vehicleRepository.getParkingPrice(VehicleType.CAR, ParkingTimeMeasure.DAY));
+        float carParkingPrice = calculateVehicleParkingPrice(ParkingPriceDomainModel.CAR, (int) parkingHours, vehicleRepository.getParkingPrice(ParkingPriceDomainModel.CAR, ParkingPriceDomainModel.HOUR), vehicleRepository.getParkingPrice(ParkingPriceDomainModel.CAR, ParkingPriceDomainModel.DAY));
         return String.valueOf((int) carParkingPrice);
     }
 
@@ -98,7 +69,7 @@ public class VehicleUseCaseImpl implements VehicleUseCase {
         float parkingHours = calculateParkingHours(motoVehicleDomainModel);
 
         //Calculate vehicle parking price
-        float motoParkingPrice = calculateVehicleParkingPrice(VehicleType.MOTO, (int) parkingHours, vehicleRepository.getParkingPrice(VehicleType.MOTO, ParkingTimeMeasure.HOUR), vehicleRepository.getParkingPrice(VehicleType.MOTO, ParkingTimeMeasure.DAY));
+        float motoParkingPrice = calculateVehicleParkingPrice(ParkingPriceDomainModel.MOTO, (int) parkingHours, vehicleRepository.getParkingPrice(ParkingPriceDomainModel.MOTO, ParkingPriceDomainModel.HOUR), vehicleRepository.getParkingPrice(ParkingPriceDomainModel.MOTO, ParkingPriceDomainModel.DAY));
 
         //Validate moto cylinder capacity
         if (motoVehicleDomainModel.getCylinderCapacity() > 500) motoParkingPrice += 2000;
@@ -121,7 +92,7 @@ public class VehicleUseCaseImpl implements VehicleUseCase {
             if (hoursLeft >= 9) {
                 totalPrice += dayPrice;
             } else {
-                if (!VehicleType.CAR.equals(vehicleType))
+                if (!ParkingPriceDomainModel.CAR.equals(vehicleType))
                     totalPrice += hoursLeft * dayPrice;
             }
 

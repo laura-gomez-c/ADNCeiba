@@ -2,7 +2,7 @@ package com.ceiba.adnparquedero.presentation.di;
 
 import android.app.Application;
 
-import com.ceiba.adnparquedero.presentation.App;
+import com.ceiba.adnparquedero.App;
 import com.ceiba.adnparquedero.presentation.di.modules.ActivityModule;
 import com.ceiba.adnparquedero.presentation.di.modules.RepositoryModule;
 import com.ceiba.adnparquedero.presentation.di.modules.UseCaseModule;

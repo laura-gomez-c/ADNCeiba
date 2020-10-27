@@ -1,4 +1,4 @@
-package com.ceiba.adnparquedero.presentation;
+package com.ceiba.adnparquedero;
 
 import android.app.Activity;
 import android.app.Application;

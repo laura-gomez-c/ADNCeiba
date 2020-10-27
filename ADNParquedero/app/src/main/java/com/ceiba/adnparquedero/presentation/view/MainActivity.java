@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.ceiba.adnparquedero.R;
-import com.ceiba.adnparquedero.domain.common.constant.ParkingTimeMeasure;
-import com.ceiba.adnparquedero.domain.common.constant.VehicleType;
 import com.ceiba.adnparquedero.domain.model.ParkingPriceDomainModel;
 import com.ceiba.adnparquedero.presentation.viewmodel.MainViewModel;
 
@@ -47,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
     //TODO: Method intended for testing, remove it when presentation implementation will be done.
     public void initializeParkingPriceTable() {
         List<ParkingPriceDomainModel> parkingPriceDomainModelList = new ArrayList<>();
-        parkingPriceDomainModelList.add(new ParkingPriceDomainModel(1000f, VehicleType.CAR, ParkingTimeMeasure.HOUR));
-        parkingPriceDomainModelList.add(new ParkingPriceDomainModel(500f, VehicleType.MOTO, ParkingTimeMeasure.HOUR));
-        parkingPriceDomainModelList.add(new ParkingPriceDomainModel(8000f, VehicleType.CAR, ParkingTimeMeasure.DAY));
-        parkingPriceDomainModelList.add(new ParkingPriceDomainModel(4000f, VehicleType.MOTO, ParkingTimeMeasure.DAY));
+        parkingPriceDomainModelList.add(new ParkingPriceDomainModel(1000f, ParkingPriceDomainModel.CAR, ParkingPriceDomainModel.HOUR));
+        parkingPriceDomainModelList.add(new ParkingPriceDomainModel(500f, ParkingPriceDomainModel.MOTO, ParkingPriceDomainModel.HOUR));
+        parkingPriceDomainModelList.add(new ParkingPriceDomainModel(8000f, ParkingPriceDomainModel.CAR, ParkingPriceDomainModel.DAY));
+        parkingPriceDomainModelList.add(new ParkingPriceDomainModel(4000f, ParkingPriceDomainModel.MOTO, ParkingPriceDomainModel.DAY));
         mainViewModel.createPriceTable(parkingPriceDomainModelList);
     }
 }

@@ -12,13 +12,9 @@ public interface VehicleUseCase {
 
     void registerMoto(MotoVehicleDomainModel motoVehicleDomainModel);
 
-    String getArrivingTime(Calendar calendar);
-
     boolean hasCarCapacity();
 
     boolean hasMotoCapacity();
-
-    boolean hasValidEntryByDay(VehicleDomainModel vehicleDomainModel);
 
     String collectCarParking(String licensePlate);
 
