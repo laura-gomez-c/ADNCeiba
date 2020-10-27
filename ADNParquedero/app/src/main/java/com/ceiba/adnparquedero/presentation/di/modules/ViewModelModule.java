@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.ceiba.adnparquedero.presentation.viewmodel.FactoryViewModel;
 import com.ceiba.adnparquedero.presentation.di.annotation.ViewModelKey;
 import com.ceiba.adnparquedero.presentation.viewmodel.MainViewModel;
+import com.ceiba.adnparquedero.presentation.viewmodel.RegisterVehicleViewModel;
 
 import dagger.Binds;
 import dagger.Module;
@@ -21,4 +22,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainViewModel.class)
     abstract ViewModel bindMainActivityViewModel(MainViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RegisterVehicleViewModel.class)
+    abstract ViewModel bindRegisterVehicleViewModel(RegisterVehicleViewModel viewModel);
 }

@@ -5,6 +5,9 @@ import lombok.Data;
 @Data
 public class CarVehicleDomainModel extends VehicleDomainModel {
 
+    //Constants
+    public static final int capacity = 20;
+
     public CarVehicleDomainModel() {
     }
 

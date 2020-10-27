@@ -5,6 +5,10 @@ import lombok.Data;
 @Data
 public class MotoVehicleDomainModel extends VehicleDomainModel {
 
+    //Constants
+    public static final int capacity = 10;
+
+    //Attributes
     private Float cylinderCapacity;
 
 

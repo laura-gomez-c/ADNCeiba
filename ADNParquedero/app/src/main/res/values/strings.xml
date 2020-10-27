@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">ADNParquedero</string>
+
+    <!-- Common strings -->
+    <string name="generic_message_progress">Por favor espere...</string>
+    <string name="generic_error">Ha ocurrido un error inesperado</string>
+    <string name="accept">Aceptar</string>
+    <string name="register">Registrar</string>
+    <string name="list_is_empty">List is empty</string>
+
+    <!-- Main activity -->
+    <string name="edit_text_search">Buscar placa</string>
+    <string name="btn_view_posts">Ver publicaciones</string>
+    <string name="btn_register_car">Registrar carro</string>
+    <string name="btn_register_moto">Registrar moto</string>
+
+    <!-- RegisterVehicle activity -->
+    <string name="hint_license_plate">Ingrese licencia</string>
+    <string name="hint_arriving_time">Ingrese hora de llegada</string>
+    <string name="hint_cylinder_capacity">Ingrese cilindraje</string>
 </resources>

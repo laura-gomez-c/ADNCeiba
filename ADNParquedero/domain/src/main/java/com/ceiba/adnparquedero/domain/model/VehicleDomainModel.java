@@ -35,7 +35,7 @@ public class VehicleDomainModel {
      *
      * @return true if the entry is valid. Otherwise, false.
      */
-    public boolean hasValidEntryByDay() {
+    protected boolean hasValidEntryByDay() {
         if (this.getLicensePlate().toUpperCase().matches("\\^".concat("A".toUpperCase()))) {
             Calendar calendar = Calendar.getInstance();
             return Calendar.SUNDAY != calendar.get(Calendar.DAY_OF_WEEK) && Calendar.MONDAY != calendar.get(Calendar.DAY_OF_WEEK);
