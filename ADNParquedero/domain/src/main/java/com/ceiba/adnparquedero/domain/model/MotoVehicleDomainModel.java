@@ -11,8 +11,8 @@ public class MotoVehicleDomainModel extends VehicleDomainModel {
     public MotoVehicleDomainModel() {
     }
 
-    public MotoVehicleDomainModel(String licensePlate, String arrivingTime, String leavingTime, Float cylinderCapacity1) {
-        super(licensePlate, arrivingTime, leavingTime);
+    public MotoVehicleDomainModel(String licensePlate, String arrivingTime, Float cylinderCapacity1) {
+        super(licensePlate, arrivingTime);
         this.cylinderCapacity = cylinderCapacity1;
     }
 }

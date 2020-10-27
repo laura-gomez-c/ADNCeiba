@@ -20,10 +20,9 @@ public class VehicleDomainModel {
     public VehicleDomainModel() {
     }
 
-    public VehicleDomainModel(String licensePlate, String arrivingTime, String leavingTime) {
+    public VehicleDomainModel(String licensePlate, String arrivingTime) {
         this.licensePlate = licensePlate;
         this.arrivingTime = arrivingTime;
-        this.leavingTime = leavingTime;
     }
 
     public void setCalendarArrivingTime(Calendar calendar) {

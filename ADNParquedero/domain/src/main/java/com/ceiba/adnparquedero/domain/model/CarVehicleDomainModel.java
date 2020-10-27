@@ -8,7 +8,7 @@ public class CarVehicleDomainModel extends VehicleDomainModel {
     public CarVehicleDomainModel() {
     }
 
-    public CarVehicleDomainModel(String licensePlate, String arrivingTime, String leavingTime) {
-        super(licensePlate, arrivingTime, leavingTime);
+    public CarVehicleDomainModel(String licensePlate, String arrivingTime) {
+        super(licensePlate, arrivingTime);
     }
 }

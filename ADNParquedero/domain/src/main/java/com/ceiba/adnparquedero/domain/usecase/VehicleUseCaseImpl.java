@@ -36,12 +36,12 @@ public class VehicleUseCaseImpl implements VehicleUseCase {
     //region Validations
     @Override
     public boolean hasCarCapacity() {
-        return 20 < vehicleRepository.getCarVehicleTypeTotalOccupancy();
+        return 20 > vehicleRepository.getCarVehicleTypeTotalOccupancy();
     }
 
     @Override
     public boolean hasMotoCapacity() {
-        return 10 < vehicleRepository.getMotoVehicleTypeTotalOccupancy();
+        return 10 > vehicleRepository.getMotoVehicleTypeTotalOccupancy();
     }
     //endregion
 
