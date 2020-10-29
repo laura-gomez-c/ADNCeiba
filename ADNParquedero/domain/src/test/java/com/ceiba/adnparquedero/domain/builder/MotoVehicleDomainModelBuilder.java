@@ -2,13 +2,7 @@ package com.ceiba.adnparquedero.domain.builder;
 
 import com.ceiba.adnparquedero.domain.model.Moto;
 
-public class MotoVehicleDomainModelBuilder {
-
-    private String licensePlate;
-
-    private String arrivingTime;
-
-    private String leavingTime;
+public class MotoVehicleDomainModelBuilder extends VehicleDomainModelBuilder {
 
     private Float cylinderCapacity;
 

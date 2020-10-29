@@ -2,11 +2,11 @@ package com.ceiba.adnparquedero.domain.builder;
 
 public abstract class VehicleDomainModelBuilder {
 
-    private String licensePlate;
+    protected String licensePlate;
 
-    private String arrivingTime;
+    protected String arrivingTime;
 
-    private String leavingTime;
+    protected String leavingTime;
 
     public VehicleDomainModelBuilder() {
         this.licensePlate = "AAA123";

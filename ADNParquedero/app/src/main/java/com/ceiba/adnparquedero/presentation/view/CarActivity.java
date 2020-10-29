@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ceiba.adnparquedero.R;
 import com.ceiba.adnparquedero.databinding.ActivityCarBinding;
+import com.ceiba.adnparquedero.databinding.PayModalViewBinding;
 import com.ceiba.adnparquedero.databinding.RegisterCarModalViewBinding;
-import com.ceiba.adnparquedero.databinding.RegisterMotoModalViewBinding;
 import com.ceiba.adnparquedero.domain.model.Car;
 import com.ceiba.adnparquedero.domain.model.Vehicle;
 import com.ceiba.adnparquedero.presentation.view.adapter.CarListAdapter;
@@ -50,9 +50,12 @@ public class CarActivity extends BaseActivity implements OnClickListenerList {
         //Observers
         viewModel.listMutableLiveData.observe(this, listObserver);
         viewModel.hasValidEntryMutableLiveData.observe(this, hasValidEntryObserver);
+        viewModel.hasCapacityMutableLiveData.observe(this, hasCapacityObserver);
+        viewModel.carRegisteredMutableLiveData.observe(this, carRegisteredObserver);
 
         //Listeners
         binding.buttonRegisterCar.setOnClickListener(buttonRegisterCarClick);
+
 
         //Logic
         renderView();
@@ -66,18 +69,26 @@ public class CarActivity extends BaseActivity implements OnClickListenerList {
 
     //region Observers
     private final Observer<List<Car>> listObserver = cars -> {
-        if (cars.isEmpty()) {
-            binding.layoutEmptyView.setVisibility(View.VISIBLE);
-        } else {
-            binding.layoutEmptyView.setVisibility(View.GONE);
-            CarListAdapter carListAdapter = new CarListAdapter(this, cars, this);
-            binding.recyclerViewCars.setAdapter(carListAdapter);
-        }
+        CarListAdapter carListAdapter = new CarListAdapter(this, cars, this);
+        binding.recyclerViewCars.setAdapter(carListAdapter);
+        binding.layoutEmptyView.setVisibility(cars.isEmpty() ? View.VISIBLE : View.GONE);
     };
 
     private final Observer<Boolean> hasValidEntryObserver = isEntryValid -> {
         if (!isEntryValid) {
-            Toast.makeText(getApplicationContext(), "You are not authorized to enter.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.not_authorized), Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    private final Observer<Boolean> hasCapacityObserver = hasCapacity -> {
+        if (!hasCapacity) {
+            Toast.makeText(getApplicationContext(), getString(R.string.no_capacity), Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    private final Observer<Boolean> carRegisteredObserver = registered -> {
+        if (registered) {
+            Toast.makeText(getApplicationContext(), getString(R.string.successfully_registered), Toast.LENGTH_LONG).show();
         }
     };
     //endregion
@@ -87,7 +98,7 @@ public class CarActivity extends BaseActivity implements OnClickListenerList {
 
     @Override
     public void listItemClickListener(Vehicle vehicle) {
-
+        showColletPriceModal(vehicle,  viewModel.collectCarParking(vehicle));
     }
     //endregion
 
@@ -99,26 +110,44 @@ public class CarActivity extends BaseActivity implements OnClickListenerList {
 
     private void showRegisterModal() {
         RegisterCarModalViewBinding modalViewBinding = RegisterCarModalViewBinding.inflate(getLayoutInflater(), null, false);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        final AlertDialog modalDialog;
+        dialogBuilder.setView(modalViewBinding.getRoot()).setCancelable(true);
+        modalDialog = dialogBuilder.create();
 
-        this.runOnUiThread(() -> {
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-            final AlertDialog modalDialog;
-            dialogBuilder.setView(modalViewBinding.getRoot()).setCancelable(true);
-            modalDialog = dialogBuilder.create();
-
-            modalViewBinding.buttonRegister.setOnClickListener(v -> {
+        modalViewBinding.buttonRegister.setOnClickListener(v -> {
+            if (viewModel.hasCarCapacity()) {
                 String licensePlate = modalViewBinding.editTextLicense.getText().toString();
                 if (!Strings.isNullOrEmpty(licensePlate)) {
                     viewModel.registerCar(licensePlate);
                     viewModel.updateCarList();
                 }
+            }
 
-                modalDialog.dismiss();
-            });
-
-
-            modalDialog.show();
+            modalDialog.dismiss();
         });
+
+
+        modalDialog.show();
+    }
+
+    private void showColletPriceModal(Vehicle vehicle, String price) {
+        PayModalViewBinding payModalViewBinding = PayModalViewBinding.inflate(getLayoutInflater(), null, false);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        final AlertDialog modalDialog;
+        dialogBuilder.setView(payModalViewBinding.getRoot()).setCancelable(true);
+        modalDialog = dialogBuilder.create();
+        payModalViewBinding.textLicensePlate.setText(vehicle.getLicensePlate());
+        payModalViewBinding.textPrice.setText("$ ".concat(price));
+
+        payModalViewBinding.buttonPay.setOnClickListener(v -> {
+            viewModel.takeOutVehicle(vehicle);
+            viewModel.updateCarList();
+            modalDialog.dismiss();
+        });
+
+
+        modalDialog.show();
     }
     //endregion
 }

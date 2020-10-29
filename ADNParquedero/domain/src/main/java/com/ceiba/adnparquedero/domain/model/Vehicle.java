@@ -34,6 +34,10 @@ public abstract class Vehicle {
         this.arrivingTime = CalendarOperatorUtil.parseCalendarToString(calendar, DATE_TIME);
     }
 
+    public void setCalendarLeavingTime(Calendar calendar) {
+        this.leavingTime = CalendarOperatorUtil.parseCalendarToString(calendar, DATE_TIME);
+    }
+
     /**
      * Method to validate the parking entry, if the license plate starting with "A" and the entry calendar day is SUNDAY or MONDAY
      * the vehicle won't be able to get in. Otherwise, the vehicle will so.

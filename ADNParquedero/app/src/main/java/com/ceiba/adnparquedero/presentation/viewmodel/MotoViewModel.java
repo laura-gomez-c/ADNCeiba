@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.ceiba.adnparquedero.domain.common.util.CalendarOperatorUtil;
 import com.ceiba.adnparquedero.domain.model.Moto;
+import com.ceiba.adnparquedero.domain.model.Vehicle;
 import com.ceiba.adnparquedero.domain.usecase.VehicleUseCase;
 
 import java.util.Calendar;
@@ -22,6 +23,8 @@ public class MotoViewModel extends ViewModel {
 
     public MutableLiveData<Boolean> hasCapacityMutableLiveData;
 
+    public MutableLiveData<Boolean> motoRegisteredMutableLiveData;
+
 
     @Inject
     public MotoViewModel(VehicleUseCase vehicleUseCase) {
@@ -29,6 +32,7 @@ public class MotoViewModel extends ViewModel {
         this.listMutableLiveData = new MutableLiveData<>(vehicleUseCase.getMotoList());
         this.hasValidEntryMutableLiveData = new MutableLiveData<>();
         this.hasCapacityMutableLiveData = new MutableLiveData<>();
+        this.motoRegisteredMutableLiveData = new MutableLiveData<>();
     }
 
     public void registerMoto(String licensePlate, Float cylinderCapacity) {
@@ -36,7 +40,7 @@ public class MotoViewModel extends ViewModel {
         moto.setCalendarArrivingTime(Calendar.getInstance());
 
         if (moto.hasValidEntryByDay()) {
-            vehicleUseCase.registerMoto(moto);
+            motoRegisteredMutableLiveData.setValue(vehicleUseCase.registerMoto(moto));
         } else {
             hasValidEntryMutableLiveData.setValue(false);
         }
@@ -49,5 +53,14 @@ public class MotoViewModel extends ViewModel {
 
     public void updateMotoList() {
         listMutableLiveData.setValue(vehicleUseCase.getMotoList());
+    }
+
+    public String collectMotoParking(Vehicle vehicle) {
+        return vehicleUseCase.collectMotoParking(vehicle.getLicensePlate());
+    }
+
+    public void takeOutVehicle(Vehicle vehicle) {
+        vehicle.setCalendarLeavingTime(Calendar.getInstance());
+        vehicleUseCase.takeOutVehicle(vehicle);
     }
 }

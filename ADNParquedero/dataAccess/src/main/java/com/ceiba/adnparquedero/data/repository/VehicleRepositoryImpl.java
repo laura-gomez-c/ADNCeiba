@@ -13,6 +13,7 @@ import com.ceiba.adnparquedero.data.local.model.VehicleEntity;
 import com.ceiba.adnparquedero.domain.model.Car;
 import com.ceiba.adnparquedero.domain.model.Moto;
 import com.ceiba.adnparquedero.domain.model.ParkingPrice;
+import com.ceiba.adnparquedero.domain.model.Vehicle;
 import com.ceiba.adnparquedero.domain.repository.VehicleRepository;
 
 import java.util.ArrayList;
@@ -67,24 +68,30 @@ public class VehicleRepositoryImpl implements VehicleRepository {
     }
 
     @Override
-    public void registerCar(Car car) {
+    public boolean registerCar(Car car) {
         try (Realm realm = Realm.getDefaultInstance()) {
             VehicleEntity vehicleEntity = vehicleTranslator.mapFromCarToVehicleEntity(car);
             realm.executeTransaction(r -> r.insertOrUpdate(vehicleEntity));
 
             CarEntity carEntity = new CarEntity(vehicleEntity);
             realm.executeTransaction(r -> r.insertOrUpdate(carEntity));
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
     @Override
-    public void registerMoto(Moto moto) {
+    public boolean registerMoto(Moto moto) {
         try (Realm realm = Realm.getDefaultInstance()) {
             VehicleEntity vehicleEntity = vehicleTranslator.mapFromMotoToVehicleEntity(moto);
             realm.executeTransaction(r -> r.insertOrUpdate(vehicleEntity));
 
             MotoEntity motoEntity = motoTranslator.mapFromMotoToMotoEntity(moto, vehicleEntity);
             realm.executeTransaction(r -> r.insertOrUpdate(motoEntity));
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
@@ -124,7 +131,7 @@ public class VehicleRepositoryImpl implements VehicleRepository {
     @Override
     public List<Car> getCarList() {
         try (Realm realm = Realm.getDefaultInstance()) {
-            RealmResults<CarEntity> carEntities = realm.where(CarEntity.class).findAll();
+            RealmResults<CarEntity> carEntities = realm.where(CarEntity.class).isNull("vehicleEntity.leavingTime").findAll();
             List<Car> carList = new ArrayList<>();
             for (CarEntity carEntity : carEntities) {
                 carList.add(carTranslator.mapFromCarEntityToCar(carEntity));
@@ -137,13 +144,25 @@ public class VehicleRepositoryImpl implements VehicleRepository {
     @Override
     public List<Moto> getMotoList() {
         try (Realm realm = Realm.getDefaultInstance()) {
-            RealmResults<MotoEntity> motoEntities = realm.where(MotoEntity.class).findAll();
+            RealmResults<MotoEntity> motoEntities = realm.where(MotoEntity.class).isNull("vehicleEntity.leavingTime").findAll();
             List<Moto> motoList = new ArrayList<>();
             for (MotoEntity motoEntity : motoEntities) {
                 motoList.add(motoTranslator.mapFromMotoEntityToMoto(motoEntity));
             }
 
             return motoList;
+        }
+    }
+
+    @Override
+    public void takeOutVehicle(Vehicle vehicle) {
+        try (Realm realm = Realm.getDefaultInstance()) {
+            VehicleEntity vehicleEntity = realm.where(VehicleEntity.class).equalTo("licensePlate", vehicle.getLicensePlate()).findFirst();
+
+            realm.executeTransaction(r -> {
+                vehicleEntity.setLeavingTime(vehicle.getLeavingTime());
+                r.insertOrUpdate(vehicleEntity);
+            });
         }
     }
 }

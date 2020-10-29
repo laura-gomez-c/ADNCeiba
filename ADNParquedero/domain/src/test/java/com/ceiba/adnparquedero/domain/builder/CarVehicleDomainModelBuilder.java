@@ -4,12 +4,6 @@ import com.ceiba.adnparquedero.domain.model.Car;
 
 public class CarVehicleDomainModelBuilder extends VehicleDomainModelBuilder {
 
-    private String licensePlate;
-
-    private String arrivingTime;
-
-    private String leavingTime;
-
     public CarVehicleDomainModelBuilder() {
         this.licensePlate = "AAA123";
         this.arrivingTime = "2020-10-09T10:10:00-0050";

@@ -15,14 +15,17 @@ import java.util.List;
 
 public class MotoListAdapter extends RecyclerView.Adapter<MotoListAdapter.ViewHolder> {
 
-    private Context context;
+    private final Context context;
 
-    private List<Moto> postList;
+    private final OnClickListenerList onClickListenerList;
+
+    private List<Moto> motoList;
 
 
-    public MotoListAdapter(Context context, List<Moto> postList) {
+    public MotoListAdapter(Context context, List<Moto> motoList, OnClickListenerList onClickListenerList) {
         this.context = context;
-        this.postList = postList;
+        this.motoList = motoList;
+        this.onClickListenerList = onClickListenerList;
     }
 
     @Override
@@ -34,14 +37,15 @@ public class MotoListAdapter extends RecyclerView.Adapter<MotoListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        viewHolder.textLicensePlate.setText(postList.get(position).getLicensePlate());
-        viewHolder.textArrivingTime.setText(context.getString(R.string.text_arriving_date).concat(postList.get(position).getArrivingTime()));
-        viewHolder.textCylinderCapacity.setText(context.getString(R.string.text_cylinder_capacity).concat(String.valueOf(postList.get(position).getCylinderCapacity())));
+        viewHolder.textLicensePlate.setText(motoList.get(position).getLicensePlate());
+        viewHolder.textArrivingTime.setText(context.getString(R.string.text_arriving_date).concat(motoList.get(position).getArrivingTime()));
+        viewHolder.textCylinderCapacity.setText(context.getString(R.string.text_cylinder_capacity).concat(String.valueOf(motoList.get(position).getCylinderCapacity())));
+        viewHolder.itemView.setOnClickListener(v -> onClickListenerList.listItemClickListener(motoList.get(position)));
     }
 
     @Override
     public int getItemCount() {
-        return postList.size();
+        return motoList.size();
     }
 
 

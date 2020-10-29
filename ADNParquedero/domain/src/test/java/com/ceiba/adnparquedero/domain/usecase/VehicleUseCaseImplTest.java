@@ -8,6 +8,7 @@ import com.ceiba.adnparquedero.domain.model.Moto;
 import com.ceiba.adnparquedero.domain.model.Vehicle;
 import com.ceiba.adnparquedero.domain.repository.VehicleRepository;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -36,17 +37,20 @@ public class VehicleUseCaseImplTest {
     @Test
     public void registerCarTest() {
         Car car = new CarVehicleDomainModelBuilder().build();
+        Mockito.when(vehicleRepository.registerCar(car)).thenReturn(true);
 
-        vehicleUseCase.registerCar(car);
-        Mockito.verify(vehicleRepository).registerCar(car);
+        boolean response = vehicleUseCase.registerCar(car);
+
+        assert (response);
     }
 
     @Test
     public void registerMotoTest() {
         Moto moto = new MotoVehicleDomainModelBuilder().build();
+        Mockito.when(vehicleRepository.registerMoto(moto)).thenReturn(true);
 
-        vehicleUseCase.registerMoto(moto);
-        Mockito.verify(vehicleRepository).registerMoto(moto);
+        boolean response = vehicleUseCase.registerMoto(moto);
+        assert (response);
     }
 
     @Test
@@ -98,8 +102,10 @@ public class VehicleUseCaseImplTest {
         Mockito.when(vehicleUseCaseImpl.calculateParkingHours(car)).thenReturn(2f);
         Mockito.when(vehicleRepository.getParkingPrice("CAR", "HOUR")).thenReturn(10f);
         Mockito.when(vehicleRepository.getParkingPrice("CAR", "DAY")).thenReturn(10f);
+        Mockito.when(vehicleUseCaseImpl.calculateVehicleParkingPrice("CAR", 2, 10f, 10f)).thenReturn(2000f);
 
         String carParkingPrice = vehicleUseCase.collectCarParking(car.getLicensePlate());
 
+        Assert.assertEquals(carParkingPrice, String.valueOf(0));
     }
 }

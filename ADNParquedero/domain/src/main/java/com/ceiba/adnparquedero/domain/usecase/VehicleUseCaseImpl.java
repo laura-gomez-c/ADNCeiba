@@ -23,13 +23,13 @@ public class VehicleUseCaseImpl implements VehicleUseCase {
 
     //region Register
     @Override
-    public void registerCar(Car car) {
-        vehicleRepository.registerCar(car);
+    public boolean registerCar(Car car) {
+        return vehicleRepository.registerCar(car);
     }
 
     @Override
-    public void registerMoto(Moto moto) {
-        vehicleRepository.registerMoto(moto);
+    public boolean registerMoto(Moto moto) {
+        return vehicleRepository.registerMoto(moto);
     }
     //endregion
 
@@ -57,6 +57,12 @@ public class VehicleUseCaseImpl implements VehicleUseCase {
     public boolean hasMotoCapacity() {
         return Moto.CAPACITY > vehicleRepository.getMotoVehicleTypeTotalOccupancy();
     }
+
+    @Override
+    public void takeOutVehicle(Vehicle vehicle) {
+        vehicleRepository.takeOutVehicle(vehicle);
+    }
+
     //endregion
 
     //region Collect parking price

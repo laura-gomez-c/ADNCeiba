@@ -16,9 +16,9 @@ import java.util.List;
 
 public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHolder> {
 
-    private Context context;
+    private final Context context;
 
-    private OnClickListenerList onClickListenerList;
+    private final OnClickListenerList onClickListenerList;
 
     private List<Car> carList;
 
@@ -45,7 +45,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHold
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         viewHolder.textLicensePlate.setText(carList.get(position).getLicensePlate());
         viewHolder.textArrivingTime.setText(context.getString(R.string.text_arriving_date).concat(carList.get(position).getArrivingTime()));
-        //viewHolder.btnViewPost.setOnClickListener(view -> onClickListenerList.listItemClickListener(carList.get(position)));
+        viewHolder.itemView.setOnClickListener(v -> onClickListenerList.listItemClickListener(carList.get(position)));
     }
 
     @Override
@@ -54,13 +54,11 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHold
     }
 
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textLicensePlate;
+        public TextView textLicensePlate;
 
-        TextView textArrivingTime;
-
-        Button btnViewPost;
+        public TextView textArrivingTime;
 
         ViewHolder(final CarListItemBinding itemView) {
             super(itemView.getRoot());

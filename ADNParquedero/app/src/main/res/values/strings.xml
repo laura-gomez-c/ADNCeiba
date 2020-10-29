@@ -2,18 +2,19 @@
     <string name="app_name">ADNParquedero</string>
 
     <!-- Common strings -->
-    <string name="generic_message_progress">Por favor espere...</string>
-    <string name="generic_error">Ha ocurrido un error inesperado</string>
-    <string name="accept">Aceptar</string>
-    <string name="register">Registrar</string>
+    <string name="register">Register</string>
     <string name="list_is_empty">List is empty</string>
     <string name="edit_text_search">Search by license plate</string>
+    <string name="successfully_registered">Successfully registered!</string>
+    <string name="no_capacity">Sorry! There\'s no capacity</string>
+    <string name="not_authorized">You are not authorized to enter this vehicle</string>
 
-    <!-- Main activity -->
     <string name="btn_register_car">Register car</string>
     <string name="btn_register_moto">Register motorcycle</string>
 
-    <!-- RegisterVehicle activity -->
     <string name="text_arriving_date">Arriving date: </string>
     <string name="text_cylinder_capacity">Cylinder capacity: </string>
+
+    <string name="text_pay_description">Total price to be paid:</string>
+    <string name="text_pay">Pay</string>
 </resources>
