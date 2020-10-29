@@ -1,26 +1,30 @@
 package com.ceiba.adnparquedero.domain.repository;
 
-import com.ceiba.adnparquedero.domain.model.CarVehicleDomainModel;
-import com.ceiba.adnparquedero.domain.model.MotoVehicleDomainModel;
-import com.ceiba.adnparquedero.domain.model.ParkingPriceDomainModel;
+import com.ceiba.adnparquedero.domain.model.Car;
+import com.ceiba.adnparquedero.domain.model.Moto;
+import com.ceiba.adnparquedero.domain.model.ParkingPrice;
 
 import java.util.List;
 
 public interface VehicleRepository {
 
-    void createParkingPriceTable(List<ParkingPriceDomainModel> priceDomainModels);
+    void createParkingPriceTable(List<ParkingPrice> priceDomainModels);
 
-    void registerCar(CarVehicleDomainModel carVehicleDomainModel);
+    void registerCar(Car car);
 
-    void registerMoto(MotoVehicleDomainModel motoVehicleDomainModel);
+    void registerMoto(Moto moto);
 
     Integer getCarVehicleTypeTotalOccupancy();
 
     Integer getMotoVehicleTypeTotalOccupancy();
 
-    CarVehicleDomainModel getCarVehicleByLicensePlate(String licensePlate);
+    Car getCarVehicleByLicensePlate(String licensePlate);
 
-    MotoVehicleDomainModel getMotoVehicleByLicensePlate(String licensePlate);
+    Moto getMotoVehicleByLicensePlate(String licensePlate);
 
     Float getParkingPrice(String vehicleType, String parkingTimeMeasure);
+
+    List<Car> getCarList();
+
+    List<Moto> getMotoList();
 }

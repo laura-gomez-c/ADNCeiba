@@ -1,16 +1,15 @@
 package com.ceiba.adnparquedero.domain.usecase;
 
-import com.ceiba.adnparquedero.domain.model.CarVehicleDomainModel;
-import com.ceiba.adnparquedero.domain.model.MotoVehicleDomainModel;
-import com.ceiba.adnparquedero.domain.model.VehicleDomainModel;
+import com.ceiba.adnparquedero.domain.model.Car;
+import com.ceiba.adnparquedero.domain.model.Moto;
 
-import java.util.Calendar;
+import java.util.List;
 
 public interface VehicleUseCase {
 
-    void registerCar(CarVehicleDomainModel carVehicleDomainModel);
+    void registerCar(Car car);
 
-    void registerMoto(MotoVehicleDomainModel motoVehicleDomainModel);
+    void registerMoto(Moto moto);
 
     boolean hasCarCapacity();
 
@@ -19,4 +18,8 @@ public interface VehicleUseCase {
     String collectCarParking(String licensePlate);
 
     String collectMotoParking(String licensePlate);
+
+    List<Car> getCarList();
+
+    List<Moto> getMotoList();
 }

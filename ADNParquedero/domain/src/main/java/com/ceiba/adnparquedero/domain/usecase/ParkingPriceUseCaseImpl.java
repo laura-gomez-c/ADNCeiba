@@ -1,6 +1,6 @@
 package com.ceiba.adnparquedero.domain.usecase;
 
-import com.ceiba.adnparquedero.domain.model.ParkingPriceDomainModel;
+import com.ceiba.adnparquedero.domain.model.ParkingPrice;
 import com.ceiba.adnparquedero.domain.repository.VehicleRepository;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class ParkingPriceUseCaseImpl implements ParkingPriceUseCase {
     }
 
     @Override
-    public void createPriceTable(List<ParkingPriceDomainModel> priceDomainModels) {
+    public void createPriceTable(List<ParkingPrice> priceDomainModels) {
         vehicleRepository.createParkingPriceTable(priceDomainModels);
     }
 }

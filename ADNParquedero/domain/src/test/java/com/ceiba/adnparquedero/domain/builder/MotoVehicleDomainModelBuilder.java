@@ -1,7 +1,6 @@
 package com.ceiba.adnparquedero.domain.builder;
 
-import com.ceiba.adnparquedero.domain.model.CarVehicleDomainModel;
-import com.ceiba.adnparquedero.domain.model.MotoVehicleDomainModel;
+import com.ceiba.adnparquedero.domain.model.Moto;
 
 public class MotoVehicleDomainModelBuilder {
 
@@ -20,7 +19,7 @@ public class MotoVehicleDomainModelBuilder {
         this.cylinderCapacity = 500f;
     }
 
-    public MotoVehicleDomainModel build() {
-        return new MotoVehicleDomainModel(licensePlate, arrivingTime, cylinderCapacity);
+    public Moto build() {
+        return new Moto(licensePlate, arrivingTime, cylinderCapacity);
     }
 }

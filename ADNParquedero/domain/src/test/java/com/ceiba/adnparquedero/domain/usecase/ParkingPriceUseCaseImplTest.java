@@ -1,12 +1,8 @@
 package com.ceiba.adnparquedero.domain.usecase;
 
-import com.ceiba.adnparquedero.domain.builder.CarVehicleDomainModelBuilder;
 import com.ceiba.adnparquedero.domain.builder.ParkingPriceDomainModelBuilder;
-import com.ceiba.adnparquedero.domain.model.CarVehicleDomainModel;
-import com.ceiba.adnparquedero.domain.model.ParkingPriceDomainModel;
+import com.ceiba.adnparquedero.domain.model.ParkingPrice;
 import com.ceiba.adnparquedero.domain.repository.VehicleRepository;
-
-import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +29,7 @@ public class ParkingPriceUseCaseImplTest {
 
     @Test
     public void createPriceTableTest() {
-        List<ParkingPriceDomainModel> modelList = new ArrayList<>();
+        List<ParkingPrice> modelList = new ArrayList<>();
         modelList.add(new ParkingPriceDomainModelBuilder().build());
 
         parkingPriceUseCase.createPriceTable(modelList);

@@ -7,15 +7,13 @@
     <string name="accept">Aceptar</string>
     <string name="register">Registrar</string>
     <string name="list_is_empty">List is empty</string>
+    <string name="edit_text_search">Search by license plate</string>
 
     <!-- Main activity -->
-    <string name="edit_text_search">Buscar placa</string>
-    <string name="btn_view_posts">Ver publicaciones</string>
-    <string name="btn_register_car">Registrar carro</string>
-    <string name="btn_register_moto">Registrar moto</string>
+    <string name="btn_register_car">Register car</string>
+    <string name="btn_register_moto">Register motorcycle</string>
 
     <!-- RegisterVehicle activity -->
-    <string name="hint_license_plate">Ingrese licencia</string>
-    <string name="hint_arriving_time">Ingrese hora de llegada</string>
-    <string name="hint_cylinder_capacity">Ingrese cilindraje</string>
+    <string name="text_arriving_date">Arriving date: </string>
+    <string name="text_cylinder_capacity">Cylinder capacity: </string>
 </resources>

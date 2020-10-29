@@ -2,6 +2,7 @@ package com.ceiba.adnparquedero.domain.common.constant;
 
 import java.lang.annotation.Retention;
 
+//TODO: Class to be deleted
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 @Retention(SOURCE)

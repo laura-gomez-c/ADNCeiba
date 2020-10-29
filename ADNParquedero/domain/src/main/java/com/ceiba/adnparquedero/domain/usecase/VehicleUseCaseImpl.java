@@ -1,14 +1,14 @@
 package com.ceiba.adnparquedero.domain.usecase;
 
-import com.ceiba.adnparquedero.domain.common.constant.DateFormat;
 import com.ceiba.adnparquedero.domain.common.util.CalendarOperatorUtil;
-import com.ceiba.adnparquedero.domain.model.CarVehicleDomainModel;
-import com.ceiba.adnparquedero.domain.model.MotoVehicleDomainModel;
-import com.ceiba.adnparquedero.domain.model.ParkingPriceDomainModel;
-import com.ceiba.adnparquedero.domain.model.VehicleDomainModel;
+import com.ceiba.adnparquedero.domain.model.Car;
+import com.ceiba.adnparquedero.domain.model.Moto;
+import com.ceiba.adnparquedero.domain.model.ParkingPrice;
+import com.ceiba.adnparquedero.domain.model.Vehicle;
 import com.ceiba.adnparquedero.domain.repository.VehicleRepository;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -23,61 +23,74 @@ public class VehicleUseCaseImpl implements VehicleUseCase {
 
     //region Register
     @Override
-    public void registerCar(CarVehicleDomainModel carVehicleDomainModel) {
-        vehicleRepository.registerCar(carVehicleDomainModel);
+    public void registerCar(Car car) {
+        vehicleRepository.registerCar(car);
     }
 
     @Override
-    public void registerMoto(MotoVehicleDomainModel motoVehicleDomainModel) {
-        vehicleRepository.registerMoto(motoVehicleDomainModel);
+    public void registerMoto(Moto moto) {
+        vehicleRepository.registerMoto(moto);
     }
+    //endregion
+
+    //region Get
+
+    @Override
+    public List<Car> getCarList() {
+        return vehicleRepository.getCarList();
+    }
+
+    @Override
+    public List<Moto> getMotoList() {
+        return vehicleRepository.getMotoList();
+    }
+
     //endregion
 
     //region Validations
     @Override
     public boolean hasCarCapacity() {
-        return CarVehicleDomainModel.capacity > vehicleRepository.getCarVehicleTypeTotalOccupancy();
+        return Car.CAPACITY > vehicleRepository.getCarVehicleTypeTotalOccupancy();
     }
 
     @Override
     public boolean hasMotoCapacity() {
-        return MotoVehicleDomainModel.capacity > vehicleRepository.getMotoVehicleTypeTotalOccupancy();
+        return Moto.CAPACITY > vehicleRepository.getMotoVehicleTypeTotalOccupancy();
     }
     //endregion
-
 
     //region Collect parking price
     @Override
     public String collectCarParking(String licensePlate) {
-        CarVehicleDomainModel carVehicleDomainModel = vehicleRepository.getCarVehicleByLicensePlate(licensePlate);
-        if (carVehicleDomainModel == null) return null;
+        Car car = vehicleRepository.getCarVehicleByLicensePlate(licensePlate);
+        if (car == null) return null;
 
         //Calculate parking hours
-        float parkingHours = calculateParkingHours(carVehicleDomainModel);
+        float parkingHours = calculateParkingHours(car);
 
         //Calculate vehicle parking price
-        float carParkingPrice = calculateVehicleParkingPrice(ParkingPriceDomainModel.CAR, (int) parkingHours, vehicleRepository.getParkingPrice(ParkingPriceDomainModel.CAR, ParkingPriceDomainModel.HOUR), vehicleRepository.getParkingPrice(ParkingPriceDomainModel.CAR, ParkingPriceDomainModel.DAY));
+        float carParkingPrice = calculateVehicleParkingPrice(ParkingPrice.CAR, (int) parkingHours, vehicleRepository.getParkingPrice(ParkingPrice.CAR, ParkingPrice.HOUR), vehicleRepository.getParkingPrice(ParkingPrice.CAR, ParkingPrice.DAY));
         return String.valueOf((int) carParkingPrice);
     }
 
     @Override
     public String collectMotoParking(String licensePlate) {
-        MotoVehicleDomainModel motoVehicleDomainModel = vehicleRepository.getMotoVehicleByLicensePlate(licensePlate);
-        if (motoVehicleDomainModel == null) return null;
+        Moto moto = vehicleRepository.getMotoVehicleByLicensePlate(licensePlate);
+        if (moto == null) return null;
 
         //Calculate parking hours
-        float parkingHours = calculateParkingHours(motoVehicleDomainModel);
+        float parkingHours = calculateParkingHours(moto);
 
         //Calculate vehicle parking price
-        float motoParkingPrice = calculateVehicleParkingPrice(ParkingPriceDomainModel.MOTO, (int) parkingHours, vehicleRepository.getParkingPrice(ParkingPriceDomainModel.MOTO, ParkingPriceDomainModel.HOUR), vehicleRepository.getParkingPrice(ParkingPriceDomainModel.MOTO, ParkingPriceDomainModel.DAY));
+        float motoParkingPrice = calculateVehicleParkingPrice(ParkingPrice.MOTO, (int) parkingHours, vehicleRepository.getParkingPrice(ParkingPrice.MOTO, ParkingPrice.HOUR), vehicleRepository.getParkingPrice(ParkingPrice.MOTO, ParkingPrice.DAY));
 
         //Validate moto cylinder capacity
-        if (motoVehicleDomainModel.getCylinderCapacity() > 500) motoParkingPrice += 2000;
+        if (moto.getCylinderCapacity() > 500) motoParkingPrice += 2000;
         return String.valueOf((int) motoParkingPrice);
     }
 
-    public float calculateParkingHours(VehicleDomainModel vehicleDomainModel) {
-        Calendar arrivingTime = CalendarOperatorUtil.parseStringToCalendar(vehicleDomainModel.getArrivingTime(), DateFormat.DATE_TIME);
+    public float calculateParkingHours(Vehicle vehicle) {
+        Calendar arrivingTime = CalendarOperatorUtil.parseStringToCalendar(vehicle.getArrivingTime(), Vehicle.DATE_TIME);
         return CalendarOperatorUtil.obtainHourDifference(arrivingTime, Calendar.getInstance());
     }
 
@@ -92,7 +105,7 @@ public class VehicleUseCaseImpl implements VehicleUseCase {
             if (hoursLeft >= 9) {
                 totalPrice += dayPrice;
             } else {
-                if (!ParkingPriceDomainModel.CAR.equals(vehicleType))
+                if (!ParkingPrice.CAR.equals(vehicleType))
                     totalPrice += hoursLeft * dayPrice;
             }
 

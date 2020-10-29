@@ -1,8 +1,8 @@
 package com.ceiba.adnparquedero.domain.builder;
 
-import com.ceiba.adnparquedero.domain.model.CarVehicleDomainModel;
+import com.ceiba.adnparquedero.domain.model.Car;
 
-public class CarVehicleDomainModelBuilder {
+public class CarVehicleDomainModelBuilder extends VehicleDomainModelBuilder {
 
     private String licensePlate;
 
@@ -16,8 +16,8 @@ public class CarVehicleDomainModelBuilder {
         this.leavingTime = "2020-10-09T10:10:00-0050";
     }
 
-    public CarVehicleDomainModel build() {
-        return new CarVehicleDomainModel(licensePlate, arrivingTime);
+    public Car build() {
+        return new Car(licensePlate, arrivingTime);
     }
 
     public CarVehicleDomainModelBuilder withArrivingTime(String arrivingTime){

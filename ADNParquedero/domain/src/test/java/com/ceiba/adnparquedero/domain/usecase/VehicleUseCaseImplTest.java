@@ -2,10 +2,10 @@ package com.ceiba.adnparquedero.domain.usecase;
 
 import com.ceiba.adnparquedero.domain.builder.CarVehicleDomainModelBuilder;
 import com.ceiba.adnparquedero.domain.builder.MotoVehicleDomainModelBuilder;
-import com.ceiba.adnparquedero.domain.common.constant.DateFormat;
 import com.ceiba.adnparquedero.domain.common.util.CalendarOperatorUtil;
-import com.ceiba.adnparquedero.domain.model.CarVehicleDomainModel;
-import com.ceiba.adnparquedero.domain.model.MotoVehicleDomainModel;
+import com.ceiba.adnparquedero.domain.model.Car;
+import com.ceiba.adnparquedero.domain.model.Moto;
+import com.ceiba.adnparquedero.domain.model.Vehicle;
 import com.ceiba.adnparquedero.domain.repository.VehicleRepository;
 
 import org.junit.Before;
@@ -35,18 +35,18 @@ public class VehicleUseCaseImplTest {
 
     @Test
     public void registerCarTest() {
-        CarVehicleDomainModel carVehicleDomainModel = new CarVehicleDomainModelBuilder().build();
+        Car car = new CarVehicleDomainModelBuilder().build();
 
-        vehicleUseCase.registerCar(carVehicleDomainModel);
-        Mockito.verify(vehicleRepository).registerCar(carVehicleDomainModel);
+        vehicleUseCase.registerCar(car);
+        Mockito.verify(vehicleRepository).registerCar(car);
     }
 
     @Test
     public void registerMotoTest() {
-        MotoVehicleDomainModel motoVehicleDomainModel = new MotoVehicleDomainModelBuilder().build();
+        Moto moto = new MotoVehicleDomainModelBuilder().build();
 
-        vehicleUseCase.registerMoto(motoVehicleDomainModel);
-        Mockito.verify(vehicleRepository).registerMoto(motoVehicleDomainModel);
+        vehicleUseCase.registerMoto(moto);
+        Mockito.verify(vehicleRepository).registerMoto(moto);
     }
 
     @Test
@@ -88,18 +88,18 @@ public class VehicleUseCaseImplTest {
     @Test
     public void collectCarParking() {
         Calendar calendar = Calendar.getInstance();
-        String arrivingTime = CalendarOperatorUtil.parseCalendarToString(calendar, DateFormat.DATE_TIME);
+        String arrivingTime = CalendarOperatorUtil.parseCalendarToString(calendar, Vehicle.DATE_TIME);
 
         calendar.add(Calendar.HOUR, 2);
-        String leavingTime = CalendarOperatorUtil.parseCalendarToString(calendar, DateFormat.DATE_TIME);
+        String leavingTime = CalendarOperatorUtil.parseCalendarToString(calendar, Vehicle.DATE_TIME);
 
-        CarVehicleDomainModel carVehicleDomainModel = new CarVehicleDomainModelBuilder().withArrivingTime(arrivingTime).withLeavingTime(leavingTime).build();
-        Mockito.when(vehicleRepository.getCarVehicleByLicensePlate(carVehicleDomainModel.getLicensePlate())).thenReturn(carVehicleDomainModel);
-        Mockito.when(vehicleUseCaseImpl.calculateParkingHours(carVehicleDomainModel)).thenReturn(2f);
+        Car car = new CarVehicleDomainModelBuilder().withArrivingTime(arrivingTime).withLeavingTime(leavingTime).build();
+        Mockito.when(vehicleRepository.getCarVehicleByLicensePlate(car.getLicensePlate())).thenReturn(car);
+        Mockito.when(vehicleUseCaseImpl.calculateParkingHours(car)).thenReturn(2f);
         Mockito.when(vehicleRepository.getParkingPrice("CAR", "HOUR")).thenReturn(10f);
         Mockito.when(vehicleRepository.getParkingPrice("CAR", "DAY")).thenReturn(10f);
 
-        String carParkingPrice = vehicleUseCase.collectCarParking(carVehicleDomainModel.getLicensePlate());
+        String carParkingPrice = vehicleUseCase.collectCarParking(car.getLicensePlate());
 
     }
 }

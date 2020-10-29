@@ -1,6 +1,6 @@
 package com.ceiba.adnparquedero.domain.builder;
 
-import com.ceiba.adnparquedero.domain.model.ParkingPriceDomainModel;
+import com.ceiba.adnparquedero.domain.model.ParkingPrice;
 
 public class ParkingPriceDomainModelBuilder {
 
@@ -12,11 +12,11 @@ public class ParkingPriceDomainModelBuilder {
 
     public ParkingPriceDomainModelBuilder() {
         this.price = 100f;
-        this.vehicleType = ParkingPriceDomainModel.CAR;;
-        this.parkingTimeMeasure = ParkingPriceDomainModel.DAY;;
+        this.vehicleType = ParkingPrice.CAR;;
+        this.parkingTimeMeasure = ParkingPrice.DAY;;
     }
 
-    public ParkingPriceDomainModel build() {
-        return new ParkingPriceDomainModel(price, vehicleType, parkingTimeMeasure);
+    public ParkingPrice build() {
+        return new ParkingPrice(price, vehicleType, parkingTimeMeasure);
     }
 }

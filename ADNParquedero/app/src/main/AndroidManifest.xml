@@ -10,7 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ADNParquedero">
-        <activity android:name=".presentation.view.RegisterVehicleActivity" />
+        <activity
+            android:name=".presentation.view.MotoActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".presentation.view.CarActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name=".presentation.view.MainActivity"
             android:windowSoftInputMode="adjustPan|adjustResize">

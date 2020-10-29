@@ -3,10 +3,11 @@ package com.ceiba.adnparquedero.presentation.di.modules;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.ceiba.adnparquedero.presentation.viewmodel.CarViewModel;
 import com.ceiba.adnparquedero.presentation.viewmodel.FactoryViewModel;
 import com.ceiba.adnparquedero.presentation.di.annotation.ViewModelKey;
 import com.ceiba.adnparquedero.presentation.viewmodel.MainViewModel;
-import com.ceiba.adnparquedero.presentation.viewmodel.RegisterVehicleViewModel;
+import com.ceiba.adnparquedero.presentation.viewmodel.MotoViewModel;
 
 import dagger.Binds;
 import dagger.Module;
@@ -21,10 +22,15 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(MainViewModel.class)
-    abstract ViewModel bindMainActivityViewModel(MainViewModel viewModel);
+    abstract ViewModel bindMainViewModel(MainViewModel viewModel);
 
     @Binds
     @IntoMap
-    @ViewModelKey(RegisterVehicleViewModel.class)
-    abstract ViewModel bindRegisterVehicleViewModel(RegisterVehicleViewModel viewModel);
+    @ViewModelKey(CarViewModel.class)
+    abstract ViewModel bindCarViewModel(CarViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MotoViewModel.class)
+    abstract ViewModel bindMotoViewModel(MotoViewModel viewModel);
 }

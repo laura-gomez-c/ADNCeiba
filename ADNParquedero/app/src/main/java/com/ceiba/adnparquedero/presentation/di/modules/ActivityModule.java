@@ -1,7 +1,8 @@
 package com.ceiba.adnparquedero.presentation.di.modules;
 
 import com.ceiba.adnparquedero.presentation.view.MainActivity;
-import com.ceiba.adnparquedero.presentation.view.RegisterVehicleActivity;
+import com.ceiba.adnparquedero.presentation.view.CarActivity;
+import com.ceiba.adnparquedero.presentation.view.MotoActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -14,5 +15,8 @@ public interface ActivityModule {
     MainActivity contributeMainActivity();
 
     @ContributesAndroidInjector()
-    RegisterVehicleActivity contributeRegisterVehicleActivity();
+    CarActivity contributeCarActivity();
+
+    @ContributesAndroidInjector()
+    MotoActivity contributeMotoActivity();
 }
