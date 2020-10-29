@@ -1,15 +1,15 @@
 package com.ceiba.adnparquedero.data.local.model;
 
-import com.ceiba.adnparquedero.domain.model.ParkingPrice;
-
 import java.util.UUID;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class ParkingPriceEntity extends RealmObject {
 
     @PrimaryKey

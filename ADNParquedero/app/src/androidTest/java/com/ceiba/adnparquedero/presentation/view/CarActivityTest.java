@@ -18,7 +18,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-public class CarActivityTest extends TestCase {
+public class CarActivityTest {
 
     private PageObject pageObject;
 

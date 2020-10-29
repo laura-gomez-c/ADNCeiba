@@ -1,8 +1,10 @@
 package com.ceiba.adnparquedero.domain.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class Moto extends Vehicle {
 
     //Constants

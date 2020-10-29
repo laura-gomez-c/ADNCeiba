@@ -9,10 +9,7 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -32,19 +29,9 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':domain')
 
-    //Compatibility
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-
-    // Lifecycle
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
-
     // Utility
-    implementation "com.google.guava:guava:28.1-jre"
     compileOnly "org.projectlombok:lombok:1.18.12"
     annotationProcessor "org.projectlombok:lombok:1.18.12"
 
@@ -54,22 +41,4 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:2.23.2"
     annotationProcessor "com.google.dagger:dagger-android-processor:2.23.2"
     annotationProcessor "com.google.dagger:dagger-compiler:2.23.2"
-
-    //Testing
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    testImplementation 'android.arch.core:core-testing:1.0.0-alpha3'
-    testImplementation 'org.mockito:mockito-core:2.8.47'
-    testImplementation 'org.powermock:powermock-core:1.7.4'
-    testImplementation 'org.powermock:powermock-module-testng:1.7.4'
-    testImplementation 'org.powermock:powermock-api-mockito2:1.7.4'
-
-    // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test:rules:1.1.0'
-
-    // Assertions
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.ext:truth:1.0.0'
-    androidTestImplementation 'com.google.truth:truth:0.42'
 }
