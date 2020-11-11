@@ -33,14 +33,11 @@ public class CarActivityTest {
 
     @Test
     public void registerCar() throws InterruptedException {
-        pageObject.sleep(1);
+
         pageObject.clickButton(R.id.button_register_car);
-        pageObject.sleep(1);
         pageObject.clickButton(R.id.button_register_car);
-        pageObject.sleep(3);
         pageObject.writeEdit(R.id.editTextLicense, "ABC123");
         pageObject.clickButton(R.id.button_register);
-        pageObject.sleep(2);
 
 
         //pageObject.matchToast(R.string.successfully_registered);

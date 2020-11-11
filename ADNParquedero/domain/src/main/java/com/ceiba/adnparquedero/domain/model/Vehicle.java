@@ -1,6 +1,6 @@
 package com.ceiba.adnparquedero.domain.model;
 
-import com.ceiba.adnparquedero.domain.common.util.CalendarOperatorUtil;
+import com.ceiba.adnparquedero.domain.calendar.CalendarOperatorUtil;
 
 import java.util.Calendar;
 
@@ -16,10 +16,6 @@ public abstract class Vehicle {
     protected String licensePlate;
     protected String arrivingTime;
     protected String leavingTime;
-
-
-    public Vehicle() {
-    }
 
     public Vehicle(String licensePlate) {
         this.licensePlate = licensePlate;

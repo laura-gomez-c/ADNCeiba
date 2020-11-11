@@ -1,4 +1,4 @@
-package com.ceiba.adnparquedero.domain.common.util;
+package com.ceiba.adnparquedero.domain.calendar;
 
 import com.google.common.base.Strings;
 

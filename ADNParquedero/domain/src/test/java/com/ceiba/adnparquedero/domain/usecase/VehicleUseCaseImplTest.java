@@ -2,7 +2,7 @@ package com.ceiba.adnparquedero.domain.usecase;
 
 import com.ceiba.adnparquedero.domain.builder.CarVehicleDomainModelBuilder;
 import com.ceiba.adnparquedero.domain.builder.MotoVehicleDomainModelBuilder;
-import com.ceiba.adnparquedero.domain.common.util.CalendarOperatorUtil;
+import com.ceiba.adnparquedero.domain.calendar.CalendarOperatorUtil;
 import com.ceiba.adnparquedero.domain.model.Car;
 import com.ceiba.adnparquedero.domain.model.Moto;
 import com.ceiba.adnparquedero.domain.model.Vehicle;
@@ -45,12 +45,16 @@ public class VehicleUseCaseImplTest {
     }
 
     @Test
-    public void registerMotoTest() {
+    public void registerMoto_successfulRegister_shouldBeTrue() {
+        //Arrange
         Moto moto = new MotoVehicleDomainModelBuilder().build();
         Mockito.when(vehicleRepository.registerMoto(moto)).thenReturn(true);
 
+        //Act
         boolean response = vehicleUseCase.registerMoto(moto);
-        assert (response);
+
+        //Assert
+        Assert.assertTrue(response);
     }
 
     @Test

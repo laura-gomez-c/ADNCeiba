@@ -1,6 +1,6 @@
 package com.ceiba.adnparquedero.domain.usecase;
 
-import com.ceiba.adnparquedero.domain.common.util.CalendarOperatorUtil;
+import com.ceiba.adnparquedero.domain.calendar.CalendarOperatorUtil;
 import com.ceiba.adnparquedero.domain.model.Car;
 import com.ceiba.adnparquedero.domain.model.Moto;
 import com.ceiba.adnparquedero.domain.model.ParkingPrice;
@@ -14,7 +14,7 @@ import javax.inject.Inject;
 
 public class VehicleUseCaseImpl implements VehicleUseCase {
 
-    VehicleRepository vehicleRepository;
+    private VehicleRepository vehicleRepository;
 
     @Inject
     public VehicleUseCaseImpl(VehicleRepository vehicleRepository) {
@@ -34,7 +34,6 @@ public class VehicleUseCaseImpl implements VehicleUseCase {
     //endregion
 
     //region Get
-
     @Override
     public List<Car> getCarList() {
         return vehicleRepository.getCarList();
@@ -44,7 +43,6 @@ public class VehicleUseCaseImpl implements VehicleUseCase {
     public List<Moto> getMotoList() {
         return vehicleRepository.getMotoList();
     }
-
     //endregion
 
     //region Validations
@@ -62,7 +60,6 @@ public class VehicleUseCaseImpl implements VehicleUseCase {
     public void takeOutVehicle(Vehicle vehicle) {
         vehicleRepository.takeOutVehicle(vehicle);
     }
-
     //endregion
 
     //region Collect parking price

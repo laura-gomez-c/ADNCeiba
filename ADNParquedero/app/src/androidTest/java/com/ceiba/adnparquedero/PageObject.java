@@ -37,7 +37,6 @@ public class PageObject {
 
     public void clickRecycleViewItemWithTitle(int recycleView, String text) {
         onView(withId(recycleView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText(text)), ViewActions.click()));
-
     }
 
     public void matchToast(int idMessage) {

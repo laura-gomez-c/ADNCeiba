@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 public class ParkingPriceUseCaseImpl implements ParkingPriceUseCase {
 
-    VehicleRepository vehicleRepository;
+    private VehicleRepository vehicleRepository;
 
     @Inject
     public ParkingPriceUseCaseImpl(VehicleRepository vehicleRepository) {

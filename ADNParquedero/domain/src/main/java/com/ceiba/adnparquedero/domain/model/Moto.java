@@ -13,10 +13,6 @@ public class Moto extends Vehicle {
     //Attributes
     private Float cylinderCapacity;
 
-
-    public Moto() {
-    }
-
     public Moto(String licensePlate, Float cylinderCapacity) {
         super(licensePlate);
         this.cylinderCapacity = cylinderCapacity;

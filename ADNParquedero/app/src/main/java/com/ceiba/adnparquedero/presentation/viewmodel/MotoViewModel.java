@@ -3,7 +3,6 @@ package com.ceiba.adnparquedero.presentation.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.ceiba.adnparquedero.domain.common.util.CalendarOperatorUtil;
 import com.ceiba.adnparquedero.domain.model.Moto;
 import com.ceiba.adnparquedero.domain.model.Vehicle;
 import com.ceiba.adnparquedero.domain.usecase.VehicleUseCase;

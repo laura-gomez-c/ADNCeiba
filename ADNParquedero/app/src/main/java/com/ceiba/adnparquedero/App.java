@@ -38,6 +38,7 @@ public class App extends Application implements HasActivityInjector {
         Realm.init(this);
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
                 .deleteRealmIfMigrationNeeded()
+                //.initialData()
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
     }

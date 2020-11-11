@@ -8,10 +8,7 @@ import lombok.EqualsAndHashCode;
 public class Car extends Vehicle {
 
     //Constants
-    public static final int CAPACITY = 20;
-
-    public Car() {
-    }
+    public static final int CAPACITY = 2;
 
     public Car(String licensePlate) {
         super(licensePlate);

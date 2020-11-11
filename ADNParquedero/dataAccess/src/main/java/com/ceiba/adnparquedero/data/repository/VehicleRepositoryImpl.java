@@ -49,7 +49,6 @@ public class VehicleRepositoryImpl implements VehicleRepository {
             }
             //Insert locally
             realm.executeTransaction(r -> r.insertOrUpdate(entities));
-            Log.d("executing..", "hecho");
         }
     }
 
